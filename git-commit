@@ -14,4 +14,3 @@ COMMIT_MSG=$(echo "$DIFF" | claude "Проанализируй эти измен
 
 echo "Предложенное сообщение коммита:"
 echo "$COMMIT_MSG"
-echo ""
