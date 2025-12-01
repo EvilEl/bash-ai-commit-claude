@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Проверяем есть ли staged изменения
+if git diff --cached --quiet; then
+    echo "Нет staged изменений. Используй 'git add' сначала."
+    exit 1
+fi
+
+# Получаем diff
+DIFF=$(git diff --cached)
+
+# Запрашиваем у Claude сообщение коммита
+COMMIT_MSG=$(echo "$DIFF" | claude "Проанализируй эти изменения и предложи сообщение коммита в conventional commits формате <тип>[область]: <описание>. Ответь ТОЛЬКО текстом сообщения, без дополнительных пояснений.")
+
+echo "Предложенное сообщение коммита:"
+echo "$COMMIT_MSG"
+echo ""
